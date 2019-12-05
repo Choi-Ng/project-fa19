@@ -4,14 +4,31 @@ sys.path.append('..')
 sys.path.append('../..')
 import argparse
 import utils
-
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import shortest_path
+from tsp_solver.greedy import solve_tsp
 from student_utils import *
 """
 ======================================================================
   Complete the following function.
 ======================================================================
 """
+def make_adjacency(x):
+    for i in range(len(x)):
+        for j in range(len(x[i])):
+            if x[i][j] == 'x':
+                x[i][j] = 0
 
+def nameToIndex(homes, locations):
+    return [locations.index(x) for x in homes]
+
+def sp(predecessors, start, end):
+    path = [predecessors[start][end], end]
+    curr_vertex = predecessors[start][end]
+    while(curr_vertex != -9999):
+        curr_vertex = predecessors[start][curr_vertex]
+        path.insert(0,curr_vertex)
+    return path
 def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_matrix, params=[]):
     """
     Write your algorithm here.
@@ -25,6 +42,38 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
         A dictionary mapping drop-off location to a list of homes of TAs that got off at that particular location
         NOTE: both outputs should be in terms of indices not the names of the locations themselves
     """
+
+    '''
+
+    '''
+    make_adjacency(adjacency_matrix)
+    graph = csr_matrix(adjacency_matrix)
+    #dist_matrix is complete graph
+    dist_matrix, predecessors = shortest_path(csgraph=graph, directed=False, return_predecessors=True)
+    length = len(list_of_locations)
+    homes = (nameToIndex(list_of_homes, list_of_locations))
+    all_locations = [x for x in range(0,length)]
+    Ls = [item for item in all_locations if item not in homes]
+    starting_index = list_of_locations.index(starting_car_location)
+    deleteLrow = [dist_matrix[i] for i in range(0,length) if i in homes or i == starting_index]
+    #deleteLcol is complete graph of only H's
+    deleteLcol = [[row[i] for i in range(0,length) if i in homes or i == starting_index] for row in deleteLrow]
+    tsp_naive = solve_tsp(deleteLcol)
+    tsp_naive = tsp_naive[tsp_naive.index(starting_index):len(tsp_naive)] +tsp_naive[0:tsp_naive.index(starting_index)] + [0]
+    print(tsp_naive)
+    for i in range(len(tsp_naive)-1):
+        j = i + 1
+        if(adjacency_matrix[tsp_naive[i]][tsp_naive[i+1]]==0):
+            print(sp(predecessors,i,j))
+            storesp = sp(predecessors,i,j)[2:-1]
+            if (storesp != None):
+                for k in range(len(storesp)):
+                    tsp_naive.insert(i+1+k, storesp[k])
+            #tsp_naive.insert(i+1,sp(predecessors,i,j)[2:-1])
+    #tsp_naive = lambda l: [item for sublist in row for item in sublist]
+    print(tsp_naive)
+
+    exit()
     pass
 
 """
