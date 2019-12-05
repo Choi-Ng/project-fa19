@@ -60,18 +60,24 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     deleteLcol = [[row[i] for i in range(0,length) if i in homes or i == starting_index] for row in deleteLrow]
     tsp_naive = solve_tsp(deleteLcol)
     tsp_naive = tsp_naive[tsp_naive.index(starting_index):len(tsp_naive)] +tsp_naive[0:tsp_naive.index(starting_index)] + [0]
-    print(tsp_naive)
+    #print(tsp_naive)
     for i in range(len(tsp_naive)-1):
         j = i + 1
         if(adjacency_matrix[tsp_naive[i]][tsp_naive[i+1]]==0):
-            print(sp(predecessors,i,j))
+            #print(sp(predecessors,i,j))
             storesp = sp(predecessors,i,j)[2:-1]
             if (storesp != None):
                 for k in range(len(storesp)):
                     tsp_naive.insert(i+1+k, storesp[k])
             #tsp_naive.insert(i+1,sp(predecessors,i,j)[2:-1])
     #tsp_naive = lambda l: [item for sublist in row for item in sublist]
-    print(tsp_naive)
+    #print(tsp_naive)
+    dict ={}
+    for h in homes:
+
+        dict[h] = [h]
+    print(dict)
+    return tsp_naive, dict
 
     exit()
     pass
