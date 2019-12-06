@@ -1,4 +1,4 @@
-Fizz Viktor Nasus Vladimir Kennen Nidalee Katarina Gragas Amumu StormSpirit Zilean Techies Brewmaster Mirana KhaZix Ezreal Kassadin Ekko ArcWarden Trundle Slark Yorick Sona Timbersaw DeathProphet Pantheon JarvanIV Janna Undying Warlock Volibear EmberSpirit Spectre Huskar Bane Orianna Talon Tiny Kled Terrorblade ArcWarden Clockwerk Xayah Azir Heimerdinger Annie Sniper Oracle TrollWarlord KhaZix TahmKench Venomancer Syndra Nunu Jinx Magnus CentaurWarrunner ShadowDemon Rubick Rumble Zed Quinn Orianna NightStalker ShadowFiend LeBlanc Karma Jayce Thresh FacelessVoid Beastmaster Tiny Talon Terrorblade Omniknight WinterWyvern Morphling Ziggs Tristana Puck SpiritBreaker Cassiopeia LoneDruid Medusa BountyHunter Fiddlesticks VelKoz Visage Ryze Irelia Kayn Vi Rengar Leona Slardar Sven Weaver Singed Chen Lucian ShadowShaman Fizz
+Fizz Viktor Nasus Vladimir Kennen Nidalee Katarina Gragas Amumu StormSpirit Zilean Techies Brewmaster Mirana KhaZix Kassadin Ekko Trundle Slark Yorick Sona Timbersaw DeathProphet Pantheon JarvanIV Janna Undying Warlock Huskar Bane Orianna Kled Xayah Azir Heimerdinger Annie Sniper Oracle TrollWarlord TahmKench Venomancer Syndra Nunu Jinx Magnus CentaurWarrunner ShadowDemon Rubick Rumble Zed Quinn NightStalker ShadowFiend LeBlanc Karma Jayce Thresh FacelessVoid Beastmaster Tiny Talon Terrorblade Omniknight WinterWyvern Morphling Ziggs Tristana Puck SpiritBreaker Cassiopeia LoneDruid Medusa BountyHunter Fiddlesticks VelKoz Visage Ryze Irelia Kayn Vi Rengar Leona Slardar Sven Weaver Singed Chen Lucian ShadowShaman Fizz
 89
 Fizz Fizz
 Viktor Viktor
@@ -31,10 +31,7 @@ Warlock Warlock
 Huskar Huskar
 Bane Bane
 Orianna Orianna
-Talon Talon
-Tiny Tiny
 Kled Kled
-Terrorblade Terrorblade
 Xayah Xayah
 Azir Azir
 Heimerdinger Heimerdinger
@@ -62,6 +59,9 @@ Jayce Jayce
 Thresh Thresh
 FacelessVoid FacelessVoid
 Beastmaster Beastmaster
+Tiny Tiny
+Talon Talon
+Terrorblade Terrorblade
 Omniknight Omniknight
 WinterWyvern WinterWyvern
 Morphling Morphling

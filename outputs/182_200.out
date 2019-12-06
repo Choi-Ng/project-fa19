@@ -1,4 +1,4 @@
-YuhuaEast Sennett SerangoonGarden SingaporeRiver ChinaSquare SerangoonNorth TagoreSindo Punggol BenoiSector BedokSouth Trafalgar PasirRisPark Shipyard SembawangStraits OneTreeHill HongKah UpperThomson Kembangan ChoaChuKang DefuIndustrialPark HougangCentral Saujana BoatQuay Aljunied YioChuKang Mountbatten Northland WoodlandsWest BukitBatokSouth KebunBahru SerangoonCentral TelokBlangahDrive PunggolField PasirPanjang2 TiongBahru TuasBay Senja TuasPromenade Tanglin ChangiWest EastCoast Sembawang TampinesNorth JooSengPayaLebar JurongPort PeiChun DairyFarm PangSua LoyangEast WaterwayEast SungeiRoad YuhuaEast KentRidge Commonwealth WestCoast CityHall Chatsworth WestCoast InstitutionHill KentRidge BukitPanjang TuasNorthPioneer SouthernIslands HongKahNorth KeatHong Dunearn SembawangHills UluPandan YioChuKangEast KianTeck BukitTimah Serangoon Brickworks TelokBlangahRise Sentosa SungeiKadut BayfrontSubzone PeoplesPark OrangeGrove Matilda Geylang PasirPanjang1 SembawangEast TelokBlangahDrive TelokBlangahDrive Commonwealth SembawangEast PasirRis Mandai BoonLayPlace LowerSeletar PearlsHill MandaiEast RochorCanal Port AlexandraNorth SimpangNorth Paterson Khatib PulauPunggolTimor ReservoirView EvertonPark ClementiNorth PasirRisDrive TohGuan PayaLebarEast Museum Moulmein GeylangEast KebunBahru Tampines BukitBatokWest DhobyGhaut Cairnhill ChangiPoint AngMoKioTownCentre OneNorth JurongWestCentral IstanaNegara BedokNorth CityHall YuhuaEast
+YuhuaEast Sennett SerangoonGarden SingaporeRiver ChinaSquare SerangoonNorth TagoreSindo Punggol BenoiSector RafflesPlace BedokSouth Trafalgar PasirRisPark Shipyard SembawangStraits OneTreeHill HongKah UpperThomson Kembangan ChoaChuKang DefuIndustrialPark HougangCentral Saujana BoatQuay Aljunied YioChuKang Mountbatten Northland WoodlandsWest BukitBatokSouth PasirPanjang2 SerangoonCentral PasirPanjang2 PunggolField TuasBay TiongBahru TuasBay SembawangEast TuasPromenade Tanglin ChangiWest NatureReserve EastCoast Sembawang TampinesNorth JooSengPayaLebar JurongPort PeiChun DairyFarm PangSua Kranji SungeiRoad WaterwayEast SungeiRoad Commonwealth KentRidge Commonwealth Chatsworth InstitutionHill Chatsworth TuasNorthPioneer WestCoast SouthernIslands HongKahNorth KeatHong Dunearn SembawangHills Dunearn UluPandan YioChuKangEast UluPandan Serangoon Brickworks KampongUbi TelokBlangahRise Sentosa TelokBlangahRise SungeiKadut BayfrontSubzone PeoplesPark OrangeGrove Matilda Geylang Mandai PasirRis Mandai ChengSan BoonLayPlace LowerSeletar PearlsHill MandaiEast Boulevard RochorCanal Port AlexandraNorth SimpangNorth Paterson SimpangNorth Khatib PulauPunggolTimor ReservoirView EvertonPark ClementiNorth PasirRisDrive TohGuan PayaLebarEast Museum Moulmein GeylangEast MountEmily KebunBahru Tampines PengSiang BukitBatokWest DhobyGhaut Cairnhill ChangiPoint AngMoKioTownCentre Anson OneNorth JurongWestCentral ClementiWest IstanaNegara BedokNorth CityHall TelokBlangahDrive YuhuaEast
 100
 Sennett Sennett
 SerangoonGarden SerangoonGarden
@@ -28,11 +28,10 @@ Mountbatten Mountbatten
 Northland Northland
 WoodlandsWest WoodlandsWest
 BukitBatokSouth BukitBatokSouth
-KebunBahru KebunBahru
 SerangoonCentral SerangoonCentral
 PunggolField PunggolField
-TiongBahru TiongBahru
 TuasBay TuasBay
+TiongBahru TiongBahru
 TuasPromenade TuasPromenade
 Tanglin Tanglin
 ChangiWest ChangiWest
@@ -44,11 +43,10 @@ JurongPort JurongPort
 PeiChun PeiChun
 DairyFarm DairyFarm
 PangSua PangSua
-WaterwayEast WaterwayEast
 SungeiRoad SungeiRoad
-KentRidge KentRidge
+WaterwayEast WaterwayEast
 Commonwealth Commonwealth
-CityHall CityHall
+KentRidge KentRidge
 Chatsworth Chatsworth
 InstitutionHill InstitutionHill
 TuasNorthPioneer TuasNorthPioneer
@@ -68,8 +66,8 @@ PeoplesPark PeoplesPark
 OrangeGrove OrangeGrove
 Matilda Matilda
 Geylang Geylang
-PasirRis PasirRis
 Mandai Mandai
+PasirRis PasirRis
 BoonLayPlace BoonLayPlace
 LowerSeletar LowerSeletar
 PearlsHill PearlsHill
@@ -90,6 +88,7 @@ PayaLebarEast PayaLebarEast
 Museum Museum
 Moulmein Moulmein
 GeylangEast GeylangEast
+KebunBahru KebunBahru
 Tampines Tampines
 BukitBatokWest BukitBatokWest
 DhobyGhaut DhobyGhaut
@@ -100,3 +99,4 @@ OneNorth OneNorth
 JurongWestCentral JurongWestCentral
 IstanaNegara IstanaNegara
 BedokNorth BedokNorth
+CityHall CityHall
