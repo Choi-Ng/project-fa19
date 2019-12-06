@@ -73,9 +73,9 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     #tsp_naive = lambda l: [item for sublist in row for item in sublist]
     #print(tsp_naive)
     dict ={}
-    for h in homes:
-
-        dict[h] = [h]
+    for h in tsp_naive:
+        if(h in homes):
+            dict[h] = [h]
     print(dict)
     return tsp_naive, dict
 
