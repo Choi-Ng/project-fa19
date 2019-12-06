@@ -95,7 +95,7 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
 
     tsp_naive = solve_tsp(homeOnly_adj_matrix)
-    tsp_naive = convertTSPnaivePath_to_originIndex(tsp_naive_path, original_graph_index_key)
+    tsp_naive = convertTSPnaivePath_to_originIndex(tsp_naive, original_graph_index_key)
     tsp_naive = tsp_naive[tsp_naive.index(starting_index):len(tsp_naive)] +tsp_naive[0:tsp_naive.index(starting_index)] + [0]
     #print(tsp_naive)
     for i in range(len(tsp_naive)-1):
