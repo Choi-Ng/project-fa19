@@ -45,7 +45,7 @@ def removeNonHomes_rolsAndCols(dist_matrix, Hs):
                 if j in Hs:
                     row = row + [dist_matrix[i][j]]
             result_matrix = result_matrix + [row]
-            original_graph_index[len(result_matrix)-1] = i
+            original_graph_index_key[len(result_matrix)-1] = i
             new_graph_index[i] = len(result_matrix)-1
 
     return result_matrix, original_graph_index_key
