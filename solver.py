@@ -36,7 +36,7 @@ def makeHomesOnlyGraph(originalAdjacentMatrix, Hs):
 
 def removeNonHomes_rolsAndCols(dist_matrix, Hs):
     result_matrix = []
-    original_graph_index = {}
+    original_graph_index_key = {}
     new_graph_index = {}
     for i in range(len(dist_matrix)):
         if i in Hs:
