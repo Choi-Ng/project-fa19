@@ -13,14 +13,48 @@ from student_utils import *
   Complete the following function.
 ======================================================================
 """
+def nameToIndex(homes, locations):
+    return [locations.index(x) for x in homes]
+
 def make_adjacency(x):
     for i in range(len(x)):
         for j in range(len(x[i])):
             if x[i][j] == 'x':
                 x[i][j] = 0
+    return x
 
-def nameToIndex(homes, locations):
-    return [locations.index(x) for x in homes]
+
+def makeHomesOnlyGraph(originalAdjacentMatrix, Hs):
+    graph = csr_matrix(originalAdjacentMatrix)
+
+    # Find shortest_path. The shortest dist_matrix is a complete graph since the original graph is connected
+    dist_matrix, predecessors = shortest_path(csgraph=graph, directed=False, return_predecessors=True)
+    homeOnly_adj_matrix, original_graph_index_key = removeNonHomes_rolsAndCols(dist_matrix, Hs)
+
+    #shortest_paths =
+    return homeOnly_adj_matrix, original_graph_index_key, predecessors
+
+def removeNonHomes_rolsAndCols(dist_matrix, Hs):
+    result_matrix = []
+    original_graph_index = {}
+    new_graph_index = {}
+    for i in range(len(dist_matrix)):
+        if i in Hs:
+            row = []
+            for j in range(len(dist_matrix[i])):
+                if j in Hs:
+                    row = row + [dist_matrix[i][j]]
+            result_matrix = result_matrix + [row]
+            original_graph_index[len(result_matrix)-1] = i
+            new_graph_index[i] = len(result_matrix)-1
+
+    return result_matrix, original_graph_index_key
+
+def convertTSPnaivePath_to_originIndex(tsp_naive_path, original_graph_index_key):
+    for i in range(len(tsp_naive_path)):
+        tsp_naive_path[i] = original_graph_index_key[tsp_naive_path[i]]
+    return tsp_naive_path
+
 
 def sp(predecessors, start, end):
     path = [predecessors[start][end], end]
@@ -29,6 +63,7 @@ def sp(predecessors, start, end):
         curr_vertex = predecessors[start][curr_vertex]
         path.insert(0,curr_vertex)
     return path
+
 def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_matrix, params=[]):
     """
     Write your algorithm here.
@@ -46,19 +81,21 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     '''
 
     '''
-    make_adjacency(adjacency_matrix)
-    graph = csr_matrix(adjacency_matrix)
-    #dist_matrix is complete graph
-    dist_matrix, predecessors = shortest_path(csgraph=graph, directed=False, return_predecessors=True)
-    length = len(list_of_locations)
+    # Convert location names to node indices
+    num_locations = len(list_of_locations)
+    all_locations = [x for x in range(num_locations)]
+    starting_node = list_of_locations.index(starting_car_location)
     homes = (nameToIndex(list_of_homes, list_of_locations))
-    all_locations = [x for x in range(0,length)]
-    Ls = [item for item in all_locations if item not in homes]
-    starting_index = list_of_locations.index(starting_car_location)
-    deleteLrow = [dist_matrix[i] for i in range(0,length) if i in homes or i == starting_index]
-    #deleteLcol is complete graph of only H's
-    deleteLcol = [[row[i] for i in range(0,length) if i in homes or i == starting_index] for row in deleteLrow]
-    tsp_naive = solve_tsp(deleteLcol)
+    Hs = homes + [starting_node] if starting_node not in homes else homes
+    Ls = [item for item in all_locations if item not in Hs]
+    adjacency_matrix = make_adjacency(adjacency_matrix)
+
+    homeOnly_adj_matrix, original_graph_index_key, predecessors = makeHomesOnlyGraph(adjacency_matrix, Hs)
+
+
+
+    tsp_naive = solve_tsp(homeOnly_adj_matrix)
+    tsp_naive = convertTSPnaivePath_to_originIndex(tsp_naive_path, original_graph_index_key)
     tsp_naive = tsp_naive[tsp_naive.index(starting_index):len(tsp_naive)] +tsp_naive[0:tsp_naive.index(starting_index)] + [0]
     #print(tsp_naive)
     for i in range(len(tsp_naive)-1):
