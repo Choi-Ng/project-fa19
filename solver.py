@@ -96,25 +96,27 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
     tsp_naive = solve_tsp(homeOnly_adj_matrix)
     tsp_naive = convertTSPnaivePath_to_originIndex(tsp_naive, original_graph_index_key)
-    tsp_naive = tsp_naive[tsp_naive.index(starting_index):len(tsp_naive)] +tsp_naive[0:tsp_naive.index(starting_index)] + [0]
+    tsp_naive = tsp_naive[tsp_naive.index(starting_node):len(tsp_naive)] +tsp_naive[0:tsp_naive.index(starting_node)] + [starting_node]
     #print(tsp_naive)
+    full_tsp = tsp_naive
     for i in range(len(tsp_naive)-1):
         j = i + 1
-        if(adjacency_matrix[tsp_naive[i]][tsp_naive[i+1]]==0):
+        #if(adjacency_matrix[tsp_naive[i]][tsp_naive[j]]==0):
             #print(sp(predecessors,i,j))
+        if(len(sp(predecessors,i,j))>=3):
             storesp = sp(predecessors,i,j)[2:-1]
-            if (storesp != None):
-                for k in range(len(storesp)):
-                    tsp_naive.insert(i+1+k, storesp[k])
+        if (storesp != None):
+            for k in range(len(storesp)):
+                full_tsp.insert(full_tsp.index(tsp_naive[i])+1+k, storesp[k])
             #tsp_naive.insert(i+1,sp(predecessors,i,j)[2:-1])
     #tsp_naive = lambda l: [item for sublist in row for item in sublist]
     #print(tsp_naive)
     dict ={}
-    for h in tsp_naive:
+    for h in full_tsp:
         if(h in homes):
             dict[h] = [h]
     print(dict)
-    return tsp_naive, dict
+    return full_tsp, dict
 
     exit()
     pass
