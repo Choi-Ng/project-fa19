@@ -18,12 +18,13 @@ from student_utils import *
 
 # merge two dropoffs by dropping off all the TAs that were originally dropped off in OLD_DROP location to NEw_DROP location
 def mergeDropoffs(dropoff_to_TAs_dict, TA_to_dropoff_dict, old_drop, new_drop):
+
     list_TAs = dropoff_to_TAs_dict[old_drop]
     # 1. update the TA_to_dropoff_dict mapping
     for TA in list_TAs:
         TA_to_dropoff_dict[TA] = new_drop
     # 2a. add the TAs to the new_drop of dropoff_to_TAs_dict mapping
-    if new_drop in dropoff_to_TAs_dict.keys():
+    if new_drop not in dropoff_to_TAs_dict.keys():
         dropoff_to_TAs_dict[new_drop] = list_TAs
     #  2a. remove the TAs from the old_drop of dropoff_to_TAs_dict mapping
     else:
@@ -52,13 +53,18 @@ def start_and_end_indices_of_first_repeated_node(path, ignored_node):
 # =========================== optimization algorithm ============================
 
 def optimize_consecutive_tours(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict):
+    # print("tour : " + str(tour))
     if len(tour) == 0:
         return tour, dropoff_to_TAs_dict, TA_to_dropoff_dict
     optimized_tour = []
     list_consecutive_tours = breakdown_consecutive_tours(tour)
     for subtour in list_consecutive_tours:
+        # print("subtour : " + str(subtour))
         optimized_subtour, dropoff_to_TAs_dict, TA_to_dropoff_dict = optimize_single_tour(subtour, dropoff_to_TAs_dict, TA_to_dropoff_dict)
         optimized_tour.extend(optimized_subtour)
+    # quit()
+    # print("optimized_tour : " + str(optimized_tour))
+    # print()
     return optimized_tour, dropoff_to_TAs_dict, TA_to_dropoff_dict
 
 
@@ -103,7 +109,7 @@ def optimize_single_tour(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict):
         optimized_tour.extend(optimized_first_consecutive_tours)
         remaining_path = path_after_first_repeated_node
         # -----------------------------------------------------
-        has_more_repeated_nodes, first_repeated_node_start, first_repeated_node_end = start_and_end_indices_of_first_repeated_node(tour, ignored_node=starting_node)
+        has_more_repeated_nodes, first_repeated_node_start, first_repeated_node_end = start_and_end_indices_of_first_repeated_node(remaining_path, ignored_node=starting_node)
     if len(remaining_path) > 0:
         optimized_tour.extend(remaining_path)
     return optimized_tour, dropoff_to_TAs_dict, TA_to_dropoff_dict

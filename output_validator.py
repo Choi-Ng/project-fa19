@@ -26,8 +26,8 @@ def validate_output(input_file, output_file, params=[]):
     cost, driving_cost, walking_cost, message = tests(input_data, output_data, params=params)
     message = 'Comments about input file:\n\n' + input_message + 'Comments about output file:\n\n' + message
 
-
-    sum_total_cost += cost
+    if cost != 'infinite':
+        sum_total_cost += float(cost)
     sum_driving_cost += driving_cost
     sum_walking_cost += walking_cost
 
@@ -67,6 +67,8 @@ def validate_all_outputs(input_directory, output_directory, params=[]):
 
 
 def tests(input_data, output_data, params=[]):
+    driving_cost = 0
+    walking_cost = 0
     number_of_locations, number_of_houses, list_of_locations, list_of_houses, starting_location, adjacency_matrix = data_parser(input_data)
     try:
         G, message = adjacency_matrix_to_graph(adjacency_matrix)
