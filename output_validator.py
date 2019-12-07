@@ -8,18 +8,36 @@ import utils
 from student_utils import *
 import input_validator
 
+sum_total_cost = 0
+sum_driving_cost = 0
+sum_walking_cost = 0
 
 def validate_output(input_file, output_file, params=[]):
-    print('Processing', input_file)
+    global sum_total_cost
+    global sum_driving_cost
+    global sum_walking_cost
+
+    # print('Processing', input_file)
 
     input_data = utils.read_file(input_file)
     output_data = utils.read_file(output_file)
 
     input_message, input_error = input_validator.tests(input_file)
-    cost, message = tests(input_data, output_data, params=params)
+    cost, driving_cost, walking_cost, message = tests(input_data, output_data, params=params)
     message = 'Comments about input file:\n\n' + input_message + 'Comments about output file:\n\n' + message
 
-    print(message)
+
+    sum_total_cost += cost
+    sum_driving_cost += driving_cost
+    sum_walking_cost += walking_cost
+
+    print(input_file)
+    print(driving_cost)
+    print(walking_cost)
+    print(cost)
+    print()
+
+    # print(message)
     if input_error:
         return input_error, 'infinite', input_message + 'Since this input is invalid, you will not receive a score for its output.\n'
     return input_error, cost, message
@@ -32,7 +50,7 @@ def validate_all_outputs(input_directory, output_directory, params=[]):
     all_results = []
     for input_file in input_files:
         output_file = utils.input_to_output(input_file, output_directory)
-        print(input_file, output_file)
+        # print(input_file, output_file)
         if output_file not in output_files:
             print(f'No corresponding .out file for {input_file}')
             results = (None, None, f'No corresponding .out file for {input_file}')
@@ -40,6 +58,11 @@ def validate_all_outputs(input_directory, output_directory, params=[]):
             results = validate_output(input_file, output_file, params=params)
 
         all_results.append((input_file, results))
+
+    print("sum_total_cost : " + str(sum_total_cost))
+    print("sum_driving_cost : " + str(sum_driving_cost))
+    print("sum_walking_cost : " + str(sum_walking_cost))
+
     return all_results
 
 
@@ -103,10 +126,10 @@ def tests(input_data, output_data, params=[]):
         cost = 'infinite'
 
     if cost != 'infinite':
-        cost, solution_message = cost_of_solution(G, car_cycle, dropoffs)
+        cost, driving_cost, walking_cost, solution_message = cost_of_solution(G, car_cycle, dropoffs)
         message += solution_message
 
-    return cost, message
+    return cost, driving_cost, walking_cost, message
 
 
 if __name__ == '__main__':

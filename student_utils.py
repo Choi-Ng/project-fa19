@@ -105,7 +105,7 @@ def cost_of_solution(G, car_cycle, dropoff_mapping):
         cost = driving_cost + walking_cost
 
     message += f'The total cost of your solution is {cost}.\n'
-    return cost, message
+    return cost, driving_cost, walking_cost , message
 
 
 def convert_locations_to_indices(list_to_convert, list_of_locations):
