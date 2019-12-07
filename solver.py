@@ -29,7 +29,7 @@ def mergeDropoffs(dropoff_to_TAs_dict, TA_to_dropoff_dict, old_drop, new_drop):
     #  2a. remove the TAs from the old_drop of dropoff_to_TAs_dict mapping
     else:
         dropoff_to_TAs_dict[new_drop].extend(list_TAs)
-        dropoff_to_TAs_dict.pop(old_drop, None)
+    dropoff_to_TAs_dict.pop(old_drop, None)
     return dropoff_to_TAs_dict, TA_to_dropoff_dict
 
 # Find all dropoff locations along the tour except the starting_node of the tour
@@ -43,7 +43,7 @@ def dropoffs_along_the_tour(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict):
 def start_and_end_indices_of_first_repeated_node(path, ignored_node):
     for node in path:
         if path.count(node) > 1 and node != ignored_node:
-            reversedPath = path
+            reversedPath = path.copy()
             reversedPath.reverse()
             first_occurence = path.index(node)
             last_occurence = (len(reversedPath) - 1) - reversedPath.index(node)
@@ -53,18 +53,13 @@ def start_and_end_indices_of_first_repeated_node(path, ignored_node):
 # =========================== optimization algorithm ============================
 
 def optimize_consecutive_tours(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict):
-    # print("tour : " + str(tour))
     if len(tour) == 0:
         return tour, dropoff_to_TAs_dict, TA_to_dropoff_dict
     optimized_tour = []
     list_consecutive_tours = breakdown_consecutive_tours(tour)
     for subtour in list_consecutive_tours:
-        # print("subtour : " + str(subtour))
         optimized_subtour, dropoff_to_TAs_dict, TA_to_dropoff_dict = optimize_single_tour(subtour, dropoff_to_TAs_dict, TA_to_dropoff_dict)
         optimized_tour.extend(optimized_subtour)
-    # quit()
-    # print("optimized_tour : " + str(optimized_tour))
-    # print()
     return optimized_tour, dropoff_to_TAs_dict, TA_to_dropoff_dict
 
 
@@ -81,7 +76,6 @@ def breakdown_consecutive_tours(tour):
     return list_consecutive_tours
 
 def optimize_single_tour(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict):
-
     starting_node = tour[0]
     num_TAs_along_tour, dropoffs_along_tour = dropoffs_along_the_tour(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict)
     has_more_repeated_nodes, first_repeated_node_start, first_repeated_node_end = start_and_end_indices_of_first_repeated_node(tour, ignored_node=starting_node)
@@ -100,9 +94,9 @@ def optimize_single_tour(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict):
     optimized_tour = []
     remaining_path = tour
     while has_more_repeated_nodes:
-        path_before_first_repeated_node = remaining_path[0 : first_repeated_node_start]
-        first_consecutive_tours = remaining_path[first_repeated_node_start : first_repeated_node_end +1]
-        path_after_first_repeated_node = remaining_path[first_repeated_node_end+1 : len(remaining_path)]
+        path_before_first_repeated_node = remaining_path[0 : first_repeated_node_start].copy()
+        first_consecutive_tours = remaining_path[first_repeated_node_start : first_repeated_node_end +1].copy()
+        path_after_first_repeated_node = remaining_path[first_repeated_node_end+1 : len(remaining_path)].copy()
         # -----------------------------------------------------
         optimized_tour.extend(path_before_first_repeated_node)
         optimized_first_consecutive_tours, dropoff_to_TAs_dict, TA_to_dropoff_dict = optimize_consecutive_tours(first_consecutive_tours, dropoff_to_TAs_dict, TA_to_dropoff_dict)
@@ -135,8 +129,6 @@ def makeHomesOnlyGraph(originalAdjacentMatrix, Hs):
     # Find shortest_path. The shortest dist_matrix is a complete graph since the original graph is connected
     dist_matrix, predecessors = shortest_path(csgraph=graph, directed=False, return_predecessors=True)
     homeOnly_adj_matrix, original_graph_index_key = removeNonHomes_rolsAndCols(dist_matrix, Hs)
-
-    #shortest_paths =
     return homeOnly_adj_matrix, original_graph_index_key, predecessors
 
 def removeNonHomes_rolsAndCols(dist_matrix, Hs):
@@ -152,7 +144,6 @@ def removeNonHomes_rolsAndCols(dist_matrix, Hs):
             result_matrix = result_matrix + [row]
             original_graph_index_key[len(result_matrix)-1] = i
             new_graph_index[i] = len(result_matrix)-1
-
     return result_matrix, original_graph_index_key
 
 def convertTSPnaivePath_to_originIndex(tsp_naive_path, original_graph_index_key):
@@ -255,14 +246,14 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
     # optimize the tsp tour found by adding the dropoff option
     optimized_tour, dropoff_to_TAs_dict, TA_to_dropoff_dict = optimize_consecutive_tours(tour, dropoff_to_TAs_dict, TA_to_dropoff_dict)
-
     # Remove any consecutive repeated nodes in the tour created in optimization
+
     optimized_tour = remove_consecutive_repeated_nodes(optimized_tour)
 
     # Order the dropoff_to_TAs_dict mapping in the order of the tour
     dict = order_dict_in_order_of_tour(optimized_tour, dropoff_to_TAs_dict)
 
-    return tour, dict
+    return optimized_tour, dict
 
 """
 ======================================================================
